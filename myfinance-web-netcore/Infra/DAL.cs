@@ -31,7 +31,7 @@ namespace myfinance_web_netcore.Infra
             conn.Open();
         }
 
-        public void Desconect()
+        public void Disconnect()
         {
             conn.Close();
         }

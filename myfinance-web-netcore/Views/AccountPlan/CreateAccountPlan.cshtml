@@ -1,0 +1,29 @@
+@model myfinance_web_netcore.Models.AccountPlanModel
+@{
+    ViewData["Title"] = "Criar Plano de Contas";
+
+    var vDescription = string.Empty;
+    var vType = string.Empty;
+
+    try{
+        vDescription = @ViewBag.AccountPlan.Description;
+        vType = @ViewBag.AccountPlan.Type;
+    }
+    catch{}
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <form asp-controller="AccountPlan" asp-action="CreateAccountPlan">
+        <input type="hidden" asp-for="Id"><br>
+        
+        <label for="fDescription">Descrição:</label><br>
+        <input type="text" asp-for="Description" value=@vDescription><br>
+
+        <label for="fType">Tipo:</label><br>
+        <input type="text" asp-for="Type" value=@vType><br>
+
+        <button type="submit" class="btn btn-block btn-success">Registrar</button>
+    </form>
+</div>

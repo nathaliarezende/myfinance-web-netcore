@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Plano Contas";
+}
+
+<h3>Plano de Contas</h3>
+<hr>
+
+<button type="button" class="btn btn-block btn-primary" onclick="CreateAccountPlan()">Criar Plano de Contas</button><br>
+
+<table class="table table-bordered">
+  <tr>
+    <th>Id</th>
+    <th>Descrição</th>
+    <th>Tipo</th>
+    <th>#</th>
+    <th>#</th>
+  </tr>
+
+  @{
+    foreach (var item in (List<AccountPlanModel>)ViewBag.List)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Description</td>
+            <td>@item.Type</td>
+            <td><button type="button" class="btn btn-block btn-outline-warning" onclick="UpdateAccountPlan(@item.Id.ToString())">Editar</button></td>
+            <td><button type="button" class="btn btn-block btn-outline-danger" onclick="DeleteAccountPlan(@item.Id.ToString())">Excluir</button></td>
+        </tr>
+    }
+  }
+</table>
+
+<script>
+    function CreateAccountPlan()
+    {
+        window.location.href = "../AccountPlan/CreateAccountPlan";
+    }
+
+    function UpdateAccountPlan(id)
+    {
+        window.location.href = "../AccountPlan/CreateAccountPlan/" + id;
+    }
+
+    function DeleteAccountPlan(id)
+    {
+        window.location.href = "../AccountPlan/DeleteAccountPlan/" + id;
+    }
+</script>

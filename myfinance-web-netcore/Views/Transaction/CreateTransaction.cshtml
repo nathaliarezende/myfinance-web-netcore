@@ -1,0 +1,79 @@
+@using System.Globalization
+@model myfinance_web_netcore.Models.TransactionModel
+
+@{
+    ViewData["Title"] = "Resgistro de Transação Financeira";
+
+    var vId = 0;
+    var vDate = "";
+    var vValue = "";
+    var vHistory = "";
+    var vType = "";
+    var vAccountPlanId = 0;
+
+    try{
+        vId = int.Parse(@ViewBag.Transaction.Id.ToString());
+        vDate = @ViewBag.Transaction.Date.ToString("yyyy-MM-dd");
+        vAccountPlanId = int.Parse(@ViewBag.Transaction.AccountPlanId.ToString());
+        vHistory = @ViewBag.Transaction.History.ToString();
+        vType = @ViewBag.Transaction.Type.ToString();
+
+        CultureInfo invC = CultureInfo.InvariantCulture;
+        string value;
+        value = @ViewBag.Transaction.Value.ToString(invC);
+        vValue = value;
+    }
+    catch{
+    }
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <form asp-controller="Transaction" asp-action="CreateTransaction">
+        <input type="hidden" asp-for="Id"><br>
+        
+        <div class="form-group">
+            <label>Data:</label>
+            <input type="date" class="form-control" asp-for="Date" value="@vDate">
+        </div>
+        
+        <div class="form-group">
+            <label>Valor:</label><br>
+            <input type="text" class="form-control" asp-for="Value" step="0.01" value=@vValue><br>
+        </div>
+        
+        <div class="form-group">
+            <label>Histórico:</label><br>
+            <input type="text" asp-for="History" value=@vHistory><br>
+        </div>
+        
+        <div class="form-group">
+            <label>Tipo:</label><br>
+            <input type="text" asp-for="Type" value=@vType><br>
+        </div>
+        
+
+        <div class="form-group">
+            <label>Plano de Contas:</label><br>
+            <select asp-for="AccountPlanId" class="form-control">
+                @{
+                    foreach (var item in (List<AccountPlanModel>)ViewBag.List)
+                    {
+                        if (item.Id.ToString() == vAccountPlanId.ToString()) 
+                        {
+                            <option selected value="@item.Id.ToString()">@item.Description.ToString()</option>
+                        }
+                        else
+                        {
+                            <option value="@item.Id.ToString()">@item.Description.ToString()</option>
+                        }
+                    }
+
+                }
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-block btn-success">Registrar</button>
+    </form>
+</div>
