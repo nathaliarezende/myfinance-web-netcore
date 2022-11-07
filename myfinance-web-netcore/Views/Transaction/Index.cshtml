@@ -15,6 +15,7 @@
     <th>Tipo</th>
     <th>Histórico</th>
     <th>Plano de Conta</th>
+    <th>Responsável</th>
     <th>#</th>
     <th>#</th>
   </tr>
@@ -23,14 +24,15 @@
     foreach (var item in (List<TransactionModel>)ViewBag.List)
     {
         <tr>
-            <td>@item.Id</td>
+            <td>@item.TransactionId</td>
             <td>@item.Date</td>
             <td>@item.Value</td>
             <td>@item.Type</td>
             <td>@item.History</td>
             <td>@item.AccountPlanId</td>
-            <td><button type="button" class="btn btn-block btn-outline-warning" onclick="UpdateTransaction(@item.Id.ToString())">Editar</button></td>
-            <td><button type="button" class="btn btn-block btn-outline-danger" onclick="DeleteTransaction(@item.Id.ToString())">Excluir</button></td>
+            <td>@item.Username</td>
+            <td><button type="button" class="btn btn-block btn-outline-warning" onclick="UpdateTransaction(@item.TransactionId.ToString())">Editar</button></td>
+            <td><button type="button" class="btn btn-block btn-outline-danger" onclick="DeleteTransaction(@item.TransactionId.ToString())">Excluir</button></td>
         </tr>
     }
   }

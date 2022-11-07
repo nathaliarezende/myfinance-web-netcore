@@ -33,10 +33,10 @@ namespace myfinance_web_netcore.Controllers
         [HttpPost]
         public IActionResult CreateAccountPlan(AccountPlanModel form)
         {
-            if (form.Id == null)
+            if (form.AccountPlanId == null)
                 form.Insert();
             else
-                form.Update(form.Id);
+                form.Update(form.AccountPlanId);
 
             return RedirectToAction("Index");
         }

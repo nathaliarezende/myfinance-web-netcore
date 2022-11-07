@@ -20,11 +20,11 @@
     foreach (var item in (List<AccountPlanModel>)ViewBag.List)
     {
         <tr>
-            <td>@item.Id</td>
+            <td>@item.AccountPlanId</td>
             <td>@item.Description</td>
             <td>@item.Type</td>
-            <td><button type="button" class="btn btn-block btn-outline-warning" onclick="UpdateAccountPlan(@item.Id.ToString())">Editar</button></td>
-            <td><button type="button" class="btn btn-block btn-outline-danger" onclick="DeleteAccountPlan(@item.Id.ToString())">Excluir</button></td>
+            <td><button type="button" class="btn btn-block btn-outline-warning" onclick="UpdateAccountPlan(@item.AccountPlanId.ToString())">Editar</button></td>
+            <td><button type="button" class="btn btn-block btn-outline-danger" onclick="DeleteAccountPlan(@item.AccountPlanId.ToString())">Excluir</button></td>
         </tr>
     }
   }

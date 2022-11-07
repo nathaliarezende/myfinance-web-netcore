@@ -29,7 +29,8 @@ namespace myfinance_web_netcore.Controllers
                 ViewBag.Transaction = transaction;
             }
 
-            ViewBag.List = new AccountPlanModel().List();
+            ViewBag.AccountPlan = new AccountPlanModel().List();
+            ViewBag.User = new UserModel().List();
             return View();
         }
 
@@ -38,7 +39,7 @@ namespace myfinance_web_netcore.Controllers
         {
             var transaction = new Transaction();
 
-            if (form.Id == null)
+            if (form.TransactionId == null)
                 transaction.Insert(form);
             else
                 transaction.Update(form);

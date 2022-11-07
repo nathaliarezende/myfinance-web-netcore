@@ -1,0 +1,24 @@
+@model myfinance_web_netcore.Models.UserModel
+@{
+    ViewData["Title"] = "Cadastrar responsável";
+
+    var vName = string.Empty;
+
+    try{
+        vName = @ViewBag.User.User;
+    }
+    catch{}
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <form asp-controller="User" asp-action="CreateUser">
+        <input type="hidden" asp-for="UserId"><br>
+        
+        <label for="fName">Nome:</label><br>
+        <input type="text" asp-for="Name" value=@vName><br>
+
+        <button type="submit" class="btn btn-block btn-success">Registrar</button>
+    </form>
+</div>

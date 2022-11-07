@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Responsáveis";
+}
+
+<h3>Responsáveis</h3>
+<hr>
+
+<button type="button" class="btn btn-block btn-primary" onclick="CreateUser()">Cadastrar responsável</button><br>
+
+<table class="table table-bordered">
+  <tr>
+    <th>Id</th>
+    <th>Nome</th>
+    <th>#</th>
+    <th>#</th>
+  </tr>
+
+  @{
+    foreach (var item in (List<UserModel>)ViewBag.List)
+    {
+        <tr>
+            <td>@item.UserId</td>
+            <td>@item.Name</td>
+            <td><button type="button" class="btn btn-block btn-outline-warning" onclick="UpdateUser(@item.UserId.ToString())">Editar</button></td>
+            <td><button type="button" class="btn btn-block btn-outline-danger" onclick="DeleteUser(@item.UserId.ToString())">Excluir</button></td>
+        </tr>
+    }
+  }
+</table>
+
+<script>
+    function CreateUser()
+    {
+        window.location.href = "../User/CreateUser";
+    }
+
+    function UpdateUser(id)
+    {
+        window.location.href = "../User/CreateUser/" + id;
+    }
+
+    function DeleteUser(id)
+    {
+        window.location.href = "../User/DeleteUser/" + id;
+    }
+</script>

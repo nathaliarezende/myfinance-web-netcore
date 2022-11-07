@@ -4,7 +4,7 @@ namespace myfinance_web_netcore.Models
 {
     public class AccountPlanModel
     {
-        public int? Id { get; set; }
+        public int? AccountPlanId { get; set; }
         public string? Description { get; set; }
         public string? Type { get; set; }
 
@@ -24,7 +24,7 @@ namespace myfinance_web_netcore.Models
             var sql = $"UPDATE PLANO_CONTAS SET " +
                 $"Descricao = '{Description}'," +
                 $"Tipo = '{Type}' " +
-                $"WHERE id = {id}";
+                $"WHERE id_plano_contas = {id}";
             objDAL.ExecuteSQLCommand(sql);
             objDAL.Disconnect();
         }
@@ -33,7 +33,7 @@ namespace myfinance_web_netcore.Models
         {
             var objDAL = DAL.getInstance;
             objDAL.Conect();
-            var sql = $"DELETE FROM PLANO_CONTAS WHERE ID={id}";
+            var sql = $"DELETE FROM PLANO_CONTAS WHERE ID_PLANO_CONTAS={id}";
             objDAL.ExecuteSQLCommand(sql);
             objDAL.Disconnect();
         }
@@ -43,11 +43,11 @@ namespace myfinance_web_netcore.Models
             var objDAL = DAL.getInstance;
             objDAL.Conect();
 
-            var sql = $"SELECT ID, DESCRICAO, TIPO FROM PLANO_CONTAS WHERE ID = {id}";
+            var sql = $"SELECT ID_PLANO_CONTAS, DESCRICAO, TIPO FROM PLANO_CONTAS WHERE ID_PLANO_CONTAS = {id}";
             var dataTable = objDAL.ReturnDataTable(sql);
 
             var accountPlan = new AccountPlanModel(){
-                Id = int.Parse(dataTable.Rows[0]["ID"].ToString()),
+                AccountPlanId = int.Parse(dataTable.Rows[0]["ID_PLANO_CONTAS"].ToString()),
                 Description = dataTable.Rows[0]["DESCRICAO"].ToString(),
                 Type = dataTable.Rows[0]["TIPO"].ToString()
             };
@@ -63,13 +63,13 @@ namespace myfinance_web_netcore.Models
             var objDAL = DAL.getInstance;
             objDAL.Conect();
 
-            var sql = "SELECT ID, DESCRICAO, TIPO FROM PLANO_CONTAS";
+            var sql = "SELECT ID_PLANO_CONTAS, DESCRICAO, TIPO FROM PLANO_CONTAS";
             var dataTable = objDAL.ReturnDataTable(sql);
 
             for (int i=0; i < dataTable.Rows.Count; i++) 
             {
                 var accountPlan = new AccountPlanModel(){
-                    Id = int.Parse(dataTable.Rows[i]["ID"].ToString()),
+                    AccountPlanId = int.Parse(dataTable.Rows[i]["ID_PLANO_CONTAS"].ToString()),
                     Description = dataTable.Rows[i]["DESCRICAO"].ToString(),
                     Type = dataTable.Rows[i]["TIPO"].ToString()
                 };

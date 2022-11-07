@@ -10,11 +10,13 @@
     var vHistory = "";
     var vType = "";
     var vAccountPlanId = 0;
+    var vUserId = 0;
 
     try{
         vId = int.Parse(@ViewBag.Transaction.Id.ToString());
         vDate = @ViewBag.Transaction.Date.ToString("yyyy-MM-dd");
         vAccountPlanId = int.Parse(@ViewBag.Transaction.AccountPlanId.ToString());
+        vUserId = int.Parse(@ViewBag.Transaction.UserId.ToString());
         vHistory = @ViewBag.Transaction.History.ToString();
         vType = @ViewBag.Transaction.Type.ToString();
 
@@ -31,7 +33,7 @@
 
 <div>
     <form asp-controller="Transaction" asp-action="CreateTransaction">
-        <input type="hidden" asp-for="Id"><br>
+        <input type="hidden" asp-for="TransactionId"><br>
         
         <div class="form-group">
             <label>Data:</label>
@@ -40,7 +42,7 @@
         
         <div class="form-group">
             <label>Valor:</label><br>
-            <input type="text" class="form-control" asp-for="Value" step="0.01" value=@vValue><br>
+            <input type="text" id=iValor class="form-control" asp-for="Value" step="0.01" value=@vValue><br>
         </div>
         
         <div class="form-group">
@@ -58,15 +60,35 @@
             <label>Plano de Contas:</label><br>
             <select asp-for="AccountPlanId" class="form-control">
                 @{
-                    foreach (var item in (List<AccountPlanModel>)ViewBag.List)
+                    foreach (var item in (List<AccountPlanModel>)ViewBag.AccountPlan)
                     {
-                        if (item.Id.ToString() == vAccountPlanId.ToString()) 
+                        if (item.AccountPlanId.ToString() == vAccountPlanId.ToString()) 
                         {
-                            <option selected value="@item.Id.ToString()">@item.Description.ToString()</option>
+                            <option selected value="@item.AccountPlanId.ToString()">@item.Description.ToString()</option>
                         }
                         else
                         {
-                            <option value="@item.Id.ToString()">@item.Description.ToString()</option>
+                            <option value="@item.AccountPlanId.ToString()">@item.Description.ToString()</option>
+                        }
+                    }
+
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Responsável pela Transação:</label><br>
+            <select asp-for="UserId" class="form-control">
+                @{
+                    foreach (var item in (List<UserModel>)ViewBag.User)
+                    {
+                        if (item.UserId.ToString() == vUserId.ToString()) 
+                        {
+                            <option selected value="@item.UserId.ToString()">@item.Name.ToString()</option>
+                        }
+                        else
+                        {
+                            <option value="@item.UserId.ToString()">@item.Name.ToString()</option>
                         }
                     }
 
